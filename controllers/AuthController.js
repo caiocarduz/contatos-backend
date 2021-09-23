@@ -32,7 +32,7 @@ module.exports = {
         } else if (!bcrypt.compareSync(req.body.senha , usuario.senha))  {
             res.send( 'user exist but password is wrong')
         } else{
-            res.send('user is logged')
+            res.send('user is logged in')
         }
        return res.send('logando...');
     }

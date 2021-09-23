@@ -12,6 +12,8 @@ module.exports =(sequelize, Datatypes) =>{
 
         }
     );
+    
+
 
     // Telefone.hasOne(Contato);
     // Contato.belongsTo(Telefone);
