@@ -14,6 +14,13 @@ module.exports =(sequelize, Datatypes) =>{
         }
     );
 
+    c.associate =(models) =>{
+        c.hasMany(models.Telefone, {as: 'telefones', foreignKey:'contatos_id'});
+        c.belongsTo(models.Usuario, {as:'usuario', foreignKey:'usuarios_id'});
+
+
+    }
+
     // Telefone.hasOne(Contato);
     // Contato.belongsTo(Telefone);
     return c

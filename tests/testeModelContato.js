@@ -5,17 +5,25 @@ const {Contato, sequelize} = require('../database/models');
 //     u => console.log(u.toJSON())
 // )
 
-async function teste(){
-    let resultado = await Contato.create({
-        nome: "jose",
-        email: "caio@uol.com",
-        usuarios_id:1
+// async function teste(){
+//     let resultado = await Contato.create({
+//         nome: "jose",
+//         email: "caio@uol.com",
+//         usuarios_id:1
     
-    })
-    let contatos = await Contato.findAll();
-    console.log(contatos.map( c=> c));
-    sequelize.close();
+//     })
+//     let contatos = await Contato.findAll();
+//     console.log(contatos.map( c=> c));
+//     sequelize.close();
 
-}
+// }
 
-teste();
+// teste();
+
+
+Contato.findByPk(6, {include: ['telefones', 'usuario']}).then(
+    c => {
+        console.log(c.toJSON())
+        sequelize.close();
+    }
+);

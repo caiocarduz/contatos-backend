@@ -7,7 +7,7 @@ const {Telefone, sequelize} = require('../database/models');
 async function teste(){
     let resultado = await Telefone.create({
         numero: '998889999',
-        contatos_id: 6
+        contatos_id: 2
     
     })
     let telefones = await Telefone.findAll();

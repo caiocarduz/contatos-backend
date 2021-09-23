@@ -1,11 +1,14 @@
-const {Usuario} = require('../database/models');
+const {Usuario, sequelize} = require('../database/models');
 
-Usuario.findByPk(1).then(
-    u => console.log(u.toJSON())
-)
+Usuario.findByPk(1, {include:['contatos', 'colegas']}).then(
+    u => {
+        console.log(u.toJSON())
+        sequelize.close();
+    }
+);
 
-Usuario.create({
-    nome: "Iago",
-    email: "iago.com",
-    senha: "segredo"
-})
+// Usuario.create({
+//     nome: "Iago",
+//     email: "iago.com",
+//     senha: "segredo"
+// })
