@@ -32,6 +32,7 @@ module.exports =(sequelize, Datatypes) =>{
 
 
     // Usuario.hasOne(Contato)
+    u.hasone(models.Perfil, {as: perfil, foreignKey: 'usuarios_id'})
     // Contato.belongTo(Usuario)
     return u
 

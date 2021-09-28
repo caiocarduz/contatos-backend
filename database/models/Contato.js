@@ -4,7 +4,7 @@ module.exports =(sequelize, Datatypes) =>{
         {
             nome: Datatypes.STRING(),
             email: Datatypes.STRING(),
-            usuarios_id: Datatypes.INTEGER()
+            usuarios_id: Datatypes.INTEGER
         },
 
         {
@@ -16,7 +16,7 @@ module.exports =(sequelize, Datatypes) =>{
 
     c.associate =(models) =>{
         c.hasMany(models.Telefone, {as: 'telefones', foreignKey:'contatos_id'});
-        c.belongsTo(models.Usuario, {as:'usuario', foreignKey:'usuarios_id'});
+        c.belongsTo(models.Usuario, {as:'usuarios', foreignKey:'usuarios_id'});
 
 
     }
