@@ -1,4 +1,5 @@
 const Contato = require("./Contato");
+const Telefone = require("./Telefone");
 
 module.exports =(sequelize, Datatypes) =>{
     const u = sequelize.define(
@@ -19,7 +20,7 @@ module.exports =(sequelize, Datatypes) =>{
     u.associate =(models) =>{
         u.hasMany(models.Contato, {as: 'contatos', foreignKey:'usuarios_id'});
         u.belongsToMany(
-            models.Usuario,
+            models.Contato,
             {
                 as:'colegas',
                 through: 'amizades',

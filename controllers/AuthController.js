@@ -1,4 +1,4 @@
-const {Usuario, sequelize} = require("../database/models");
+const {Usuario, Contato, Telefone, sequelize} = require("../database/models");
 const bodyParser = require('body-parser');
 bcrypt = require('bcrypt');
 const { Op } = require("sequelize");
@@ -58,6 +58,16 @@ module.exports = {
         })
 
         return res.send('user has been updated')
+    
+    },
+    contato: async (req, res) => {
+      const c = await Contato.findOne({
+            where: {
+                nome: "van"
+            },
+            include : "telefones"
+        });
+        return res.send(c)
     
     }
 }

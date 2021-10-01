@@ -1,3 +1,4 @@
+const Usuario= require("./Usuario");
 module.exports =(sequelize, Datatypes) =>{
     const c = sequelize.define(
         'Contato',
@@ -8,15 +9,24 @@ module.exports =(sequelize, Datatypes) =>{
         },
 
         {
-            tableName: "contatos",
+            tableName: "contatos1",
             timestamps: false
 
         }
     );
 
     c.associate =(models) =>{
-        c.hasMany(models.Telefone, {as: 'telefones', foreignKey:'contatos_id'});
-        c.belongsTo(models.Usuario, {as:'usuarios', foreignKey:'usuarios_id'});
+        c.hasMany(models.Telefone, { as:"telefones",foreignKey:'contatos_id'});
+        c.belongsToMany(
+            models.Usuario,
+            {
+                as:'colegas',
+                through: 'amizades',
+                foreignKey:'usuarios1_id',
+                otherKey:'usuarios2_id',
+                timestamps: false
+            }
+        )
 
 
     }

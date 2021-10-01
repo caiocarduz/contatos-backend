@@ -3,14 +3,14 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.createTable(
-      'usuarios',
+      'contatos1',
       {
-        id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
         nome:  Sequelize.STRING(45),
         email: Sequelize.STRING(45),
-        senha: Sequelize.STRING(256)
-      },
+        usuarios_id: Sequelize.INTEGER()
+      }
     )
+    
     /**
      * Add altering commands here.
      *
@@ -20,7 +20,8 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('usuarios');
+    return queryInterface.dropTable('contatos1');
+
     /**
      * Add reverting commands here.
      *

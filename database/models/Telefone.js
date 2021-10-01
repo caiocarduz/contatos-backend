@@ -1,3 +1,4 @@
+const Contato = require("./Contato");
 module.exports =(sequelize, Datatypes) =>{
     const tel = sequelize.define(
         'Telefone',
@@ -12,6 +13,12 @@ module.exports =(sequelize, Datatypes) =>{
 
         }
     );
+
+    tel.associate =(models) =>{
+        tel.belongsTo(
+            models.Contato, {foreignKey:'contatos_id'}
+        )
+    }
     
 
 
