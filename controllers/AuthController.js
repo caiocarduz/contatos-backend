@@ -11,16 +11,15 @@ module.exports = {
             email : req.body.email,
             senha : bcrypt.hashSync(req.body.senha, 10)
        }
-
-    //    let usuarioObj = JSON.parse(usuario)
-    //    let nome = req.body.nome;
-    //    let email = req.body.email;
-    //    let senha = req.body.senha;
-
-       await Usuario.create(usuario)
-    //    sequelize.close();
-
-       return res.send(usuario);
+       try {
+            await Usuario.create(usuario)
+        //    sequelize.close();
+           return res.status(201).json(usuario);
+           
+       } catch (error) {
+           return res.status(403).json({error: 1, msg: 'usuario ja cadastrado'})
+           
+       }
     },
     login: async (req, res) => {
         console.log('logando...');
@@ -28,11 +27,11 @@ module.exports = {
         
     });
         if (usuario === null) {
-            res.send('Not found!');
+            res.status(403).json({error: 1, msg:'Acesso negado'});
         } else if (!bcrypt.compareSync(req.body.senha , usuario.senha))  {
-            res.send( 'user exist but password is wrong')
+            res.status(409).json({error:1, msg:'Acesso negado'})
         } else{
-            res.send('user is logged in')
+            res.status(201).json({error: 1, msg:'user is logged in'})
         }
        return res.send('logando...');
     },
@@ -63,7 +62,7 @@ module.exports = {
     contato: async (req, res) => {
       const c = await Contato.findOne({
             where: {
-                nome: "van"
+                nome: req.body.nome
             },
             include : "telefones"
         });
