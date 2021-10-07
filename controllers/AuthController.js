@@ -2,6 +2,7 @@ const {Usuario, Contato, Telefone, sequelize} = require("../database/models");
 const bodyParser = require('body-parser');
 bcrypt = require('bcrypt');
 const { Op } = require("sequelize");
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     registrar: async (req, res)=>{
@@ -31,8 +32,11 @@ module.exports = {
         } else if (!bcrypt.compareSync(req.body.senha , usuario.senha))  {
             res.status(409).json({error:1, msg:'Acesso negado'})
         } else{
-            res.status(201).json({error: 1, msg:'user is logged in'})
+            usuario.senha = undefined;
+            let token = jwt.sign(usuario.toJSON(), "jacare")
+            res.status(200).json({error: 1, msg:'user is logged in', token})
         }
+
        return res.send('logando...');
     },
     delete: async (req, res) => {
